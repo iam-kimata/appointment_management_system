@@ -1,0 +1,18 @@
+.login-card {
+  width: 100%; 
+  max-width: 450px; 
+  padding: 40px;
+  margin: 0 auto; 
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.page-content {
+  margin-left: 250px; 
+}

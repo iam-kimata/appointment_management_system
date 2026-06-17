@@ -1,0 +1,133 @@
+import { useState } from "react";
+import Sidebar from "../../components/Admin/Sidebar";
+
+const Users = () => {
+    const [showModal, setShowModal] = useState(false);
+    const [role, setRole] = useState("");
+
+    const [users] = useState([
+        { id: 1, fullName: "Rajabu Shabani", gender: "Male", location: "Mbagala", age: null, department: null, role: "Patient" },
+        { id: 2, fullName: "Nyelu Mwamkinga", gender: null, location: null, age: 49, department: "Counselling", role: "Doctor" },
+    ]);
+
+    return (
+        <div className="d-flex">
+            {/* Sidebar */}
+            <Sidebar />
+
+            <div className="container py-5 page-content">
+                <div className="card">
+                    <div className="card-header bg-dark text-light fs-5">Users
+                        <button className="btn btn-light m-2 p-1" onClick={() => setShowModal(true)}>
+                            <i className="bi bi-plus"></i>
+                        </button>
+                    </div>
+                    <div className="card-body p-0">
+                        <div className="table-responsive">
+                            <table className="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Full Name</th>
+                                        <th>Gender</th>
+                                        <th>Location</th>
+                                        <th>Age</th>
+                                        <th>Department</th>
+                                        <th>Role</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {users.map((user, index) => (
+                                        <tr key={user.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{user.fullName}</td>
+                                            <td>{user.gender ?? "NULL"}</td>
+                                            <td>{user.location ?? "NULL"}</td>
+                                            <td>{user.age ?? "NULL"}</td>
+                                            <td>{user.department ?? "NULL"}</td>
+                                            <td>{user.role}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                {/* modal */}
+                {showModal && (
+                    <div 
+                        className="modal fade show d-block" tabIndex="-1" 
+                        style={{ background: "rgba(0,0,0,0.5)" }}
+                    >
+                        <div className="modal-dialog modal-lg modal-dialog-centered">
+                            <div className="modal-content">
+                                <div className="modal-header bg-success text-light">
+                                    <h4 className="modal-title text-center fs-4 w-100">Register Users</h4>
+                                    <button className="btn-close btn-close-white" onClick={() => setShowModal(false)}></button>
+                                </div>
+                                <div className="modal-body p-4">
+                                    <form>
+                                        <div className="row">
+                                            <div className="col-md-6 mb-3">
+                                                <label htmlFor="role" className="form-label">Role</label>
+                                                <select name="role" id="role" className="form-select" value={role} onChange={(e) => setRole(e.target.value)}>
+                                                    <option value="" disabled>Select Role</option>
+                                                    <option value="Patient">Patient</option>
+                                                    <option value="Doctor">Doctor</option>
+                                                </select>
+                                            </div>
+                                            <div className="col-md-6 mb-3">
+                                                <label htmlFor="fullName" className="form-label">Full Name</label>
+                                                <input type="text" name="fullName" id="fullName" className="form-control" placeholder="Enter Full Name" />
+                                            </div>
+
+                                            {(role === "" || role === "Patient") && (
+                                                <>
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="gender" className="form-label">Gender</label>
+                                                        <input type="text" name="gender" id="gender" className="form-control" placeholder="Enter Gender" />
+                                                    </div>
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="location" className="form-label">Location</label>
+                                                        <input type="text" name="location" id="location" className="form-control" placeholder="Enter Location" />
+                                                    </div>
+                                                </>
+                                            )}
+
+                                            {(role === "" || role === "Doctor") && (
+                                                <>
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="age" className="form-label">Age</label>
+                                                        <input type="text" name="age" id="age" className="form-control" placeholder="Enter Age" />
+                                                    </div>
+                                                    <div className="col-md-6 mb-3">
+                                                        <label htmlFor="department" className="form-label">Department</label>
+                                                        <input type="text" name="department" id="department" className="form-control" placeholder="Enter Department" />
+                                                    </div>
+                                                </>
+                                            )}
+
+                                            <div className="col-md-6 mb-3">
+                                                <label htmlFor="password" className="form-label">Password</label>
+                                                <input type="password" name="password" id="password" className="form-control" placeholder="Enter Password" />
+                                            </div>
+                                            <div className="col-md-6 mb-3">
+                                                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                                                <input type="password" name="confirmPassword" id="confirmPassword" className="form-control" placeholder="Enter Confirm Password" />
+                                            </div>
+
+                                            <button type="submit" className="btn btn-success w-100">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default Users;
