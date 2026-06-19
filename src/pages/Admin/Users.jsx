@@ -6,8 +6,8 @@ const Users = () => {
     const [role, setRole] = useState("");
 
     const [users] = useState([
-        { id: 1, fullName: "Rajabu Shabani", gender: "Male", location: "Mbagala", age: null, department: null, role: "Patient" },
-        { id: 2, fullName: "Nyelu Mwamkinga", gender: null, location: null, age: 49, department: "Counselling", role: "Doctor" },
+        { id: 1, fullName: "Rajabu Shabani", email: "rajabu656@gmail.com", gender: "Male", location: "Mbagala", age: null, department: null, role: "Patient" },
+        { id: 2, fullName: "Nyelu Mwamkinga", email: "mwamkinga@gmail.com", gender: null, location: null, age: 49, department: "Counselling", role: "Doctor" },
     ]);
 
     return (
@@ -29,6 +29,7 @@ const Users = () => {
                                     <tr>
                                         <th>S/N</th>
                                         <th>Full Name</th>
+                                        <th>Email</th>
                                         <th>Gender</th>
                                         <th>Location</th>
                                         <th>Age</th>
@@ -41,6 +42,7 @@ const Users = () => {
                                         <tr key={user.id}>
                                             <td>{index + 1}</td>
                                             <td>{user.fullName}</td>
+                                            <td>{user.email}</td>
                                             <td>{user.gender ?? "NULL"}</td>
                                             <td>{user.location ?? "NULL"}</td>
                                             <td>{user.age ?? "NULL"}</td>
@@ -80,6 +82,10 @@ const Users = () => {
                                             <div className="col-md-6 mb-3">
                                                 <label htmlFor="fullName" className="form-label">Full Name</label>
                                                 <input type="text" name="fullName" id="fullName" className="form-control" placeholder="Enter Full Name" />
+                                            </div>
+                                            <div className="col-md-6 mb-3">
+                                                <label htmlFor="email" className="form-label">Email</label>
+                                                <input type="text" name="email" id="email" className="form-control" placeholder="Enter Email" />
                                             </div>
 
                                             {(role === "" || role === "Patient") && (
