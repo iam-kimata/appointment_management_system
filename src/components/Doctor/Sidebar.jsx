@@ -8,7 +8,6 @@ const Sidebar = () => {
 
                 <ul className="nav flex-column">
                     <li className="nav-item mb-4"><i className="bi bi-speedometer me-2"></i>Dashboard</li>
-                    <li className="nav-item mb-4"><i className="bi bi-calendar-date-fill me-2"></i>Cancelled Appointments</li>
                 </ul>
                 
                 <div className="mt-5 text-danger">
