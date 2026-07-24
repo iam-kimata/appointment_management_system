@@ -7,7 +7,7 @@ import DoctorDashboard from './pages/Doctor/Dashboard';
 function App() {
   return (
     <div>
-      <DoctorDashboard />
+      <AdminDashboard />
     </div>
   );
 };

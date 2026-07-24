@@ -83,8 +83,8 @@ const Dashboard = () => {
                                             <td 
                                                 className={
                                                     appointment.status === "Scheduled"
-                                                        ? "text-success"
-                                                        : "text-warning"
+                                                    ? "text-success"
+                                                    : "text-warning"
                                                 }
                                             >
                                                 {appointment.status}
@@ -105,10 +105,7 @@ const Dashboard = () => {
 
                 {/* modal */}
                 {showModal && (
-                    <div 
-                        className="modal fade show d-block" tabIndex="-1" 
-                        style={{ background: "rgba(0,0,0,0.5)" }}
-                    >
+                    <div className="modal fade show d-block" tabIndex="-1" style={{ background: "rgba(0,0,0,0.5)" }}>
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                 <div className="modal-header bg-success text-light">

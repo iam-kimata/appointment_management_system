@@ -40,8 +40,8 @@ const Dashboard = () => {
                                             <td 
                                                 className={
                                                     appointment.status === "Scheduled"
-                                                        ? "text-success"
-                                                        : "text-warning"
+                                                    ? "text-success"
+                                                    : "text-warning"
                                                 }
                                             >
                                                 {appointment.status}
