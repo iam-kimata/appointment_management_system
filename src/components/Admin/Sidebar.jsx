@@ -10,13 +10,13 @@ const Sidebar = () => {
 
                 <ul className="nav flex-column">
                     <li className="nav-item mb-4">
-                        <Link to="/dashboard" className="nav-link">
+                        <Link to="/dashboard" className="nav-link text-light">
                             <i className="bi bi-speedometer me-2"></i>
                             Dashboard
                         </Link>
                     </li>
                     <li className="nav-item mb-4">
-                        <Link to="/users" className="nav-link">
+                        <Link to="/users" className="nav-link text-light">
                             <i className="bi bi-people-fill me-2"></i>
                             Users
                         </Link>
