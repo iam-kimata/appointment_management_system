@@ -2,24 +2,14 @@ import { useState } from "react";
 import Sidebar from "../../components/Admin/Sidebar";
 
 const Dashboard = () => {
+    const [stats, setStats] = useState({});
+    const [appointments, setAppointments] = useState([])
+
     const [showModal, setShowModal] = useState(false);
 
-    const [appointments] = useState([
-        { id: 1, patient: "Aloyce Kimata", doctor: "Paul Kenedy", date: "12/09/2026", time: "12:00", status: "Scheduled" },
-        { id: 2, patient: "Nyelu Mwamkinga", doctor: "Rajabu Shabani", date: "30/10/2026", time: "07:15", status: "Cancelled" },
-    ]);
+    const [patients, setPatients] = useState([]);
 
-    const [patients] = useState([
-        { id: 1, fullName: "Aloyce Kimata" },
-        { id: 2, fullName: "Nyelu Mwamkinga" },
-        { id: 3, fullName: "Rajabu Shabani" },
-    ]);
-
-    const [doctors] = useState([
-        { id: 1, fullName: "Rajabu Shabani" },
-        { id: 2, fullName: "Denis Junior" },
-        { id: 3, fullName: "Asha Mohammed" },
-    ]);
+    const [doctors, setDoctors] = useState([]);
 
     return (
         <div>
@@ -31,21 +21,21 @@ const Dashboard = () => {
                     <div className="col">
                         <div className="card p-4 bg-success">
                             <i className="bi bi-people-fill fs-1"></i>
-                            <h3>15</h3>
+                            <h3>{stats.patients || 0}</h3>
                             <p>Total Patients</p>
                         </div>
                     </div>
                     <div className="col">
                         <div className="card p-4 bg-primary">
                             <i className="bi bi-people-fill fs-1"></i>
-                            <h3>10</h3>
+                            <h3>{stats.doctors || 0}</h3>
                             <p>Total Doctors</p>
                         </div>
                     </div>
                     <div className="col">
                         <div className="card p-4 bg-warning">
                             <i className="bi bi-calendar-date-fill fs-1"></i>
-                            <h3>5</h3>
+                            <h3>{stats.appointments || 0}</h3>
                             <p>Total Appointments</p>
                         </div>
                     </div>
@@ -76,10 +66,10 @@ const Dashboard = () => {
                                     {appointments.map((appointment, index) => (
                                         <tr key={appointment.id}>
                                             <td>{index + 1}</td>
-                                            <td>{appointment.patient}</td>
-                                            <td>{appointment.doctor}</td>
-                                            <td>{appointment.date}</td>
-                                            <td>{appointment.time}</td>
+                                            <td>{appointment.patient?.full_name}</td>
+                                            <td>{appointment.doctor?.full_name}</td>
+                                            <td>{appointment?.appointment_date}</td>
+                                            <td>{appointment?.appointment_time}</td>
                                             <td 
                                                 className={
                                                     appointment.status === "Scheduled"
@@ -87,13 +77,23 @@ const Dashboard = () => {
                                                     : "text-warning"
                                                 }
                                             >
-                                                {appointment.status}
+                                                {appointment?.status}
                                             </td>
                                             <td>
-                                                <button className="btn btn-warning text-light btn-sm">Cancel</button>
+                                                <button 
+                                                    className="btn btn-warning text-light btn-sm"
+                                                    onClick={() => handleCancel(appointment.id)}
+                                                >
+                                                    Cancel
+                                                </button>
                                             </td>
                                             <td>
-                                                <button className="btn btn-danger text-light btn-sm">Delete</button>
+                                                <button 
+                                                    className="btn btn-danger text-light btn-sm"
+                                                    onClick={() => handleDelete(appointment.id)}
+                                                >
+                                                    Delete
+                                                </button>
                                             </td>
                                         </tr>
                                     ))}
@@ -120,8 +120,8 @@ const Dashboard = () => {
                                                 <option value="" disabled>Select Patient</option>
 
                                                 {patients.map((patient) => (
-                                                    <option key={patient.id} value={patient.fullName}>
-                                                        {patient.fullName}
+                                                    <option key={patient.id} value={patient.id}>
+                                                        {patient.full_name}
                                                     </option>
                                                 ))}
                                             </select>
@@ -132,19 +132,33 @@ const Dashboard = () => {
                                                 <option value="" disabled>Select Doctor</option>
 
                                                 {doctors.map((doctor) => (
-                                                    <option key={doctor.id} value={doctor.fullName}>
-                                                        {doctor.fullName}
+                                                    <option key={doctor.id} value={doctor.id}>
+                                                        {doctor.full_name}
                                                     </option>
                                                 ))}
                                             </select>
                                         </div>
                                         <div className="mb-3">
-                                            <label htmlFor="date" className="form-label">Date</label>
-                                            <input type="date" name="date" id="date" className="form-control" />
+                                            <label htmlFor="appointment_date" className="form-label">Date</label>
+                                            <input 
+                                                type="date" 
+                                                name="appointment_date" 
+                                                id="appointment_date" 
+                                                className="form-control"
+                                                value={formData.appointment_date}
+                                                onChange={handleChange} 
+                                            />
                                         </div>
                                         <div className="mb-3">
-                                            <label htmlFor="time" className="form-label">Time</label>
-                                            <input type="time" name="time" id="time" className="form-control" />
+                                            <label htmlFor="appointment_time" className="form-label">Time</label>
+                                            <input 
+                                                type="time" 
+                                                name="appointment_time" 
+                                                id="appointment_time" 
+                                                className="form-control"
+                                                value={formData.appointment_time}
+                                                onChange={handleChange} 
+                                            />
                                         </div>
 
                                         <button type="submit" class="btn btn-success w-100">Submit</button>

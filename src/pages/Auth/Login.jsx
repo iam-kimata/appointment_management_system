@@ -67,7 +67,7 @@ const Login = () => {
                         <div className="mb-3">
                             <label htmlFor="username" className="form-label">Username</label>
 
-                            {errors.email?.[0] (
+                            {errors.email?.[0] && (
                                 <div className="text-danger small mb-1">
                                     {errors.email[0]}
                                 </div>
@@ -86,7 +86,7 @@ const Login = () => {
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>
 
-                            {errors.password?.[0] (
+                            {errors.password?.[0] && (
                                 <div className="text-danger small mb-1">
                                     {errors.password[0]}
                                 </div>
